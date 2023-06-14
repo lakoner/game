@@ -22,6 +22,10 @@ class Combat:
             if enemyHPAct <= 0:
                 print("Has ganado!")
                 print(f"Recibes {self.enemy.exp} de exp.")
+                self.player.vitMax -= self.player.vitAct
+                print(self.player.set_vitMax)
+                self.player.exp += self.enemy.exp
+                print(self.player.exp)
                 break
             vitAct -= self.enemy.attack
             print(f"Recibes: {self.enemy.get_attack()} de daño.")

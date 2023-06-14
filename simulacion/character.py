@@ -67,6 +67,33 @@ class Person:
     def get_inventory(self):
         return self.inventory
     
+    def set_name(self, name):
+        self._name = name
+
+    def set_race(self, race):
+        self._race = race
+
+    def set_vitAct(self, vitAct):
+        self._vitAct = vitAct
+
+    def set_vitMax(self, vitMax):
+        self._vitMax = vitMax
+
+    def set_attack(self, attack):
+        self._attack = attack
+
+    def set_armor(self, armor):
+        self._armor = armor
+
+    def set_gold(self, gold):
+        self._gold = gold
+
+    def set_exp(self, exp):
+        self._exp = exp
+
+    def set_inventory(self, inventory):
+        self._inventory = inventory
+        
     def printStats(self):
         total_attack, total_armor = self.calculateStats()
         print("\nEstos son los stats de tu personaje: \n"
