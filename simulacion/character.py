@@ -1,5 +1,8 @@
 from items.weapon import *
 from items.armor import *
+from items.singleUseItem import *
+from race import *
+from menu import *
 
 class Person:
     name = ""
@@ -34,6 +37,36 @@ class Person:
         self.exp = exp
         self.inventory = inventory
 
+    def __str__(self):
+        return f"Nombre: {self.name}, Vida: {self.vitAct}, Vida Total: {self.vitMax}, Ataque: {self.attack}, Defensa: {self.armor}"
+    
+    def get_name(self):
+        return self.name
+
+    def get_race(self):
+        return self.race
+
+    def get_vitAct(self):
+        return self.vitAct
+
+    def get_vitMax(self):
+        return self.vitMax
+
+    def get_attack(self):
+        return self.attack
+
+    def get_armor(self):
+        return self.armor
+
+    def get_gold(self):
+        return self.gold
+
+    def get_exp(self):
+        return self.exp
+
+    def get_inventory(self):
+        return self.inventory
+    
     def printStats(self):
         total_attack, total_armor = self.calculateStats()
         print("\nEstos son los stats de tu personaje: \n"
@@ -69,3 +102,6 @@ class Person:
     def restoreAll(self):
         self.vitAct = self.vitMax
 
+    def useSingleItemUse(self):
+        print("Pocion")
+       
