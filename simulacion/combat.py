@@ -30,14 +30,17 @@ class Combat:
                 print(f"Tienes {self.player.exp} de exp total.")
                 self.player.gold += oro
                 print(f"Tienes {self.player.gold} de oro total.")
+                Person.checkExp(self.player)
                 break
             vitAct -= self.enemy.attack
             print(f"Recibes: {self.enemy.get_attack()} de daño.")
             print(f"Tienes: {vitAct} de HP.")
             if vitAct <= 0:
                 print("has muerto")
-                print("restaurando toda la HP.")
+                print("Resucitando...")
                 Person.restoreAll(self.player)
+                self.player.level = 1
+                self.player.exp = 0
                 break
             print("\nSiguiente ronda\n")
 

@@ -15,9 +15,10 @@ class Person:
     exp = 0
     inventory = []
 
-    def __init__(self, name, race, vitAct, vitMax, attack, armor, gold, exp, inventory):
+    def __init__(self, name, race, level, vitAct, vitMax, attack, armor, gold, exp, inventory):
         self.name = name
         self.race = race
+        self.level = level
         self.vitAct = vitAct
         self.vitMax = vitMax
         self.attack = attack
@@ -46,6 +47,9 @@ class Person:
     def get_race(self):
         return self.race
 
+    def get_level(self):
+        return self.level
+    
     def get_vitAct(self):
         return self.vitAct
 
@@ -72,6 +76,9 @@ class Person:
 
     def set_race(self, race):
         self._race = race
+    
+    def set_level(self, level):
+        self._level = level
 
     def set_vitAct(self, vitAct):
         self._vitAct = vitAct
@@ -99,12 +106,13 @@ class Person:
         print("\nEstos son los stats de tu personaje: \n"
             "Nombre: "            + self.name               + "\n" +
             "Raza: "              + self.race               + "\n" +
+            "Nivel: "             + str(self.level)         + "\n" +
             "Vitalidad Actual: "  + str(self.vitAct)        + "\n" +
             "Vitalidad Maxima: "  + str(self.vitMax)        + "\n" +
             "Ataque: "            + str(total_attack)       + "\n" +
             "Armadura: "          + str(total_armor)        + "\n" +
             "Oro: "               + str(self.gold)          + "\n" +
-            "Experiencia: "       + str(self.exp))
+            "Experiencia: "       + str(self.exp) + "\n")
         
     def printInventario(self):
         print("\nEquipo Actual: \n")
@@ -131,4 +139,12 @@ class Person:
 
     def useSingleItemUse(self):
         print("Pocion")
-       
+
+    def checkExp(self):
+        totalExpToUp = 5 + (self.get_level() * 4) + self.get_level()
+        if self.exp >= totalExpToUp:
+            print("\nLevel UP!")
+            self.level += 1
+            print(f"has subido a nivel {self.level}")
+            self.exp = self.exp - totalExpToUp
+            print(f"Tienes {self.exp} de exp restante.")

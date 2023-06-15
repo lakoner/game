@@ -8,7 +8,7 @@ class Menu:
 
     def createChar():
         print("\nSaludos, vamos a crear tu personaje para esta aventura. ")
-        character = Person("", "", vitAct=10, vitMax=10, attack=1, armor=0, gold=0, exp=0, inventory=[])
+        character = Person("", "", level=1, vitAct=10, vitMax=10, attack=1, armor=0, gold=0, exp=0, inventory=[])
         character.name = input("¿Cual será tu nombre?: ")
         character.vitMax = 10
         character.attack = 1 
