@@ -2,7 +2,7 @@ from menu import *
 from combat import *
 
 player = Menu.createChar()
-print("Bienvenid@ a esta aventura " + player.race + " " + player.name)
+print("\nBienvenid@ a esta aventura " + player.race + " " + player.name)
 
 while True:
     print("\nQue deseas hacer ahora " + player.name + "? ")
@@ -11,9 +11,12 @@ while True:
     print("3. Salir\n")
     print("4. Salir\n")
     
-    choice = int(input("Seleccione una opción: "))
-    
+    choice = int(input("Selecciona una opción: "))
+    print("\n")
+
     if choice == 1:
+        print("Bienvenid@ al Menú!")
+        print("¿Que deseas hacer?")
         Menu.menu(player)
     elif choice == 2:
         enemy = Enemy.createEnemy()

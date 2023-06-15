@@ -17,21 +17,27 @@ class Combat:
 
         while True:
             enemyHPAct -= self.player.attack
-            print(f"El enemigo recibe: {self.player.attack} de daño.")
+            print(f"\nEl enemigo recibe: {self.player.attack} de daño.")
             print(f"El enemigo tiene: {enemyHPAct} de HP.")
             if enemyHPAct <= 0:
-                print("Has ganado!")
+                print("\nHas ganado!\n")
                 print(f"Recibes {self.enemy.exp} de exp.")
-                self.player.vitMax -= self.player.vitAct
-                print(self.player.set_vitMax)
+                oro = random.randint(0, 3)
+                print(f"Recibes {oro} de oro.\n")
+                self.player.vitAct = vitAct
+                print(f"Tienes {self.player.get_vitAct()} de HP restante.")
                 self.player.exp += self.enemy.exp
-                print(self.player.exp)
+                print(f"Tienes {self.player.exp} de exp total.")
+                self.player.gold += oro
+                print(f"Tienes {self.player.gold} de oro total.")
                 break
             vitAct -= self.enemy.attack
             print(f"Recibes: {self.enemy.get_attack()} de daño.")
             print(f"Tienes: {vitAct} de HP.")
             if vitAct <= 0:
                 print("has muerto")
+                print("restaurando toda la HP.")
+                Person.restoreAll(self.player)
                 break
             print("\nSiguiente ronda\n")
 

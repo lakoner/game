@@ -107,7 +107,7 @@ class Person:
             "Experiencia: "       + str(self.exp))
         
     def printInventario(self):
-        print("\nInventario: \n")
+        print("\nEquipo Actual: \n")
         for item in self.inventory:
             if isinstance(item, Weapon):
                 print("Nombre: " + item.name + " / Daño: " + str(item.damage))

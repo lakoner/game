@@ -59,7 +59,6 @@ class Menu:
 
     def menu(player):
         while True:
-            print("\n")
             print("1. Ver estadísticas del personaje")
             print("2. Ver inventario del personaje")
             print("3. Usar objetos")
