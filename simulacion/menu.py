@@ -8,7 +8,7 @@ class Menu:
 
     def createChar():
         print("\nSaludos, vamos a crear tu personaje para esta aventura. ")
-        character = Person("", "", level=1, vitAct=10, vitMax=10, attack=1, armor=0, gold=0, exp=0, inventory=[])
+        character = Person("", "", level=1, vitAct=10, vitMax=10, attack=1, armor=0, speed=1, gold=0, exp=0, inventory=[])
         character.name = input("¿Cual será tu nombre?: ")
         character.vitMax = 10
         character.attack = 1 
@@ -54,7 +54,7 @@ class Menu:
                 print("Raza no válida")
 
         character.restoreAll()
-        character.setCreateChar(character.name, character.race, character.vitAct, character.vitMax, character.attack, character.armor, character.gold, character.exp, character.inventory)
+        character.setCreateChar(character.name, character.race, character.vitAct, character.vitMax, character.attack, character.armor, character.gold, character.exp, character.speed, character.inventory)
         return character
 
     def menu(player):

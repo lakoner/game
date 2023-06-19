@@ -9,44 +9,65 @@ class Combat:
         self.enemy = enemy
 
 
-    def peleaPlayer(self):
+    def startBattle(self):
         print(self.player)
         print(self.enemy)
-        enemyHPAct = self.enemy.get_vitAct()
-        vitAct = self.player.get_vitAct()
+        print("\n")
+        fasterPlayer = self.checkFasterFight()
+        while not self.checkIfDead() or not Person.checkIfDead(self.player):
+            if fasterPlayer:
+                self.playerDoDamage()
+                if self.checkIfDead():
+                    Person.checkLevelUp(self.player)
+                    break
+                self.enemyDoDamage()
+                Person.checkIfDead(self.player)
+            else:
+                self.enemyDoDamage()
+                if Person.checkIfDead(self.player):
+                    break
+                self.playerDoDamage()
+                if self.checkIfDead():
+                    Person.checkLevelUp(self.player)
+                    break
 
-        while True:
-            enemyHPAct -= self.player.attack
-            print(f"\nEl enemigo recibe: {self.player.attack} de daño.")
-            print(f"El enemigo tiene: {enemyHPAct} de HP.")
-            if enemyHPAct <= 0:
-                print("\nHas ganado!\n")
-                print(f"Recibes {self.enemy.exp} de exp.")
-                oro = random.randint(0, 3)
-                print(f"Recibes {oro} de oro.\n")
-                self.player.vitAct = vitAct
-                print(f"Tienes {self.player.get_vitAct()} de HP restante.")
-                self.player.exp += self.enemy.exp
-                print(f"Tienes {self.player.exp} de exp total.")
+            print("\nSiguiente turno!\n")
+
+
+    def checkIfDead(self):
+        if self.enemy.vitAct <= 0:
+            print(f"\nHas matado a {self.enemy.name}")
+            print(f"Recibes {self.enemy.exp} de exp.")
+            self.player.exp += self.enemy.exp
+            print(f"Tienes {self.player.exp} de exp total.")
+            oro = random.randint(0, 3)
+            if oro != 0:
+                print(f"Recibes {oro} de oro.")
                 self.player.gold += oro
                 print(f"Tienes {self.player.gold} de oro total.")
-                Person.checkExp(self.player)
-                break
-            vitAct -= self.enemy.attack
-            print(f"Recibes: {self.enemy.get_attack()} de daño.")
-            print(f"Tienes: {vitAct} de HP.")
-            if vitAct <= 0:
-                print("has muerto")
-                print("Resucitando...")
-                Person.restoreAll(self.player)
-                self.player.level = 1
-                self.player.exp = 0
-                break
-            print("\nSiguiente ronda\n")
+            return True
 
-        
+
+    def playerDoDamage(self):
+        print("Golpeas!")
+        print(f"\nEl enemigo recibe: {self.player.attack} de daño.")
+        self.enemy.vitAct -= self.player.attack
+        print(f"El enemigo tiene: {self.enemy.vitAct} de HP restante.")
+        return self.enemy.vitAct      
     
+    def enemyDoDamage(self):
+        print("El enemigo golpea!")
+        print(f"Recibes: {self.enemy.get_attack()} de daño.")
+        self.player.vitAct -= self.enemy.attack
+        print(f"Tienes: {self.player.vitAct} de HP.")
+        return self.player.vitAct    
 
-
-
-    
+    def checkFasterFight(self):
+        playerSpeed = self.player.speed
+        enemySpeed = self.enemy.speed
+        if playerSpeed >= enemySpeed:
+            print(f"{self.player.name} empieza.")
+            return True
+        elif playerSpeed < enemySpeed:
+            print(f"El enemigo {self.enemy.name} empieza.")
+            return False

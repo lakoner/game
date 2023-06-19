@@ -1,13 +1,14 @@
 import random
 
 class Enemy:
-    def __init__(self, name, level, vitAct, vitMax, attack, armor, exp):
+    def __init__(self, name, level, vitAct, vitMax, attack, armor, speed, exp):
         self.name = name
         self.level = level
         self.vitAct = vitAct
         self.vitMax = vitMax
         self.attack = attack
         self.armor = armor
+        self.speed = speed
         self.exp = exp
 
     def __str__(self):
@@ -37,17 +38,19 @@ class Enemy:
     def createEnemy():
         enemy = random.choice(enemys)
         return enemy
-    
-dog = Enemy("Perro", 1, 3, 3, 2, 1, 1)
-crab = Enemy("Cangrejo", 1, 2, 2, 2, 2, 1)
-rat = Enemy("Rata", 1, 1, 1, 4, 1, 1)
-wildPig= Enemy("Jabalí", 2, 4, 4, 3, 4, 3)
-eagle = Enemy("Aguila", 2, 3, 3, 5, 2, 3)
-corruptedHuman = Enemy("Humano corrupto", 2, 3, 3, 3, 3, 2)
-bear = Enemy("Oso", 3, 5, 5, 7, 4, 6)
-cannibal = Enemy("Canibal", 3, 4, 4, 6, 4, 5)
-alien = Enemy("Alien", 4, 6, 6, 5, 4, 6)
-mutant = Enemy("Mutante", 4, 5, 5, 8, 8, 8)
-boss = Enemy("Jefe", 5, 10, 10, 10, 10, 10)
+
+
+
+dog = Enemy("Perro", 1, 3, 3, 2, 1, 2, 1)
+crab = Enemy("Cangrejo", 1, 2, 2, 2, 2, 1, 1)
+rat = Enemy("Rata", 1, 1, 1, 4, 1, 3, 1)
+wildPig= Enemy("Jabalí", 2, 4, 4, 3, 4, 2, 3)
+eagle = Enemy("Aguila", 2, 3, 3, 5, 2, 4, 3)
+corruptedHuman = Enemy("Humano corrupto", 2, 3, 3, 3, 3, 3, 2)
+bear = Enemy("Oso", 3, 5, 5, 7, 4, 4, 6)
+cannibal = Enemy("Canibal", 3, 4, 4, 6, 4, 4, 5)
+alien = Enemy("Alien", 4, 6, 6, 5, 4, 6, 6)
+mutant = Enemy("Mutante", 4, 5, 5, 8, 8, 4, 8)
+boss = Enemy("Jefe", 5, 10, 10, 10, 10, 10, 10)
 
 enemys = [dog, crab, rat, wildPig, eagle, corruptedHuman, bear, cannibal, alien, mutant, boss]

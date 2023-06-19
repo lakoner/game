@@ -15,7 +15,7 @@ class Person:
     exp = 0
     inventory = []
 
-    def __init__(self, name, race, level, vitAct, vitMax, attack, armor, gold, exp, inventory):
+    def __init__(self, name, race, level, vitAct, vitMax, attack, armor, speed, gold, exp, inventory):
         self.name = name
         self.race = race
         self.level = level
@@ -23,17 +23,19 @@ class Person:
         self.vitMax = vitMax
         self.attack = attack
         self.armor = armor
+        self.speed = speed
         self.gold = gold
         self.exp = exp
         self.inventory = inventory
 
-    def setCreateChar(self, name, race, vitAct, vitMax, attack, armor, gold, exp, inventory):
+    def setCreateChar(self, name, race, vitAct, vitMax, attack, armor, speed, gold, exp, inventory):
         self.name = name
         self.race = race
         self.vitAct = vitAct
         self.vitMax = vitMax
         self.attack = attack
         self.armor = armor
+        self.speed = speed
         self.gold = gold
         self.exp = exp
         self.inventory = inventory
@@ -61,6 +63,9 @@ class Person:
 
     def get_armor(self):
         return self.armor
+    
+    def get_speed(self):
+        return self.speed
 
     def get_gold(self):
         return self.gold
@@ -92,6 +97,9 @@ class Person:
     def set_armor(self, armor):
         self._armor = armor
 
+    def set_speed(self, speed):
+        self.speed = speed
+
     def set_gold(self, gold):
         self._gold = gold
 
@@ -111,6 +119,7 @@ class Person:
             "Vitalidad Maxima: "  + str(self.vitMax)        + "\n" +
             "Ataque: "            + str(total_attack)       + "\n" +
             "Armadura: "          + str(total_armor)        + "\n" +
+            "Velocidad: "         + str(self.speed)         + "\n" +
             "Oro: "               + str(self.gold)          + "\n" +
             "Experiencia: "       + str(self.exp) + "\n")
         
@@ -140,7 +149,7 @@ class Person:
     def useSingleItemUse(self):
         print("Pocion")
 
-    def checkExp(self):
+    def checkLevelUp(self):
         totalExpToUp = 5 + (self.get_level() * 4) + self.get_level()
         if self.exp >= totalExpToUp:
             print("\nLevel UP!")
@@ -148,3 +157,13 @@ class Person:
             print(f"has subido a nivel {self.level}")
             self.exp = self.exp - totalExpToUp
             print(f"Tienes {self.exp} de exp restante.")
+
+    def checkIfDead(self):
+        if self.vitAct <= 0:
+            print("Has muerto.")
+            print("Resucitando...")
+            Person.restoreAll(self)
+            self.level = 1
+            self.exp = 0
+            return True
+        
