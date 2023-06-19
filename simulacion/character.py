@@ -110,15 +110,15 @@ class Person:
         self._inventory = inventory
         
     def printStats(self):
-        total_attack, total_armor = self.calculateStats()
+        totalAttack, totalArmor = self.calculateStats()
         print("\nEstos son los stats de tu personaje: \n"
             "Nombre: "            + self.name               + "\n" +
             "Raza: "              + self.race               + "\n" +
             "Nivel: "             + str(self.level)         + "\n" +
             "Vitalidad Actual: "  + str(self.vitAct)        + "\n" +
             "Vitalidad Maxima: "  + str(self.vitMax)        + "\n" +
-            "Ataque: "            + str(total_attack)       + "\n" +
-            "Armadura: "          + str(total_armor)        + "\n" +
+            "Ataque: "            + str(totalAttack)       + "\n" +
+            "Armadura: "          + str(totalArmor)        + "\n" +
             "Velocidad: "         + str(self.speed)         + "\n" +
             "Oro: "               + str(self.gold)          + "\n" +
             "Experiencia: "       + str(self.exp) + "\n")
@@ -130,24 +130,64 @@ class Person:
                 print("Nombre: " + item.name + " / Daño: " + str(item.damage))
             elif isinstance(item, Armor):
                 print("Nombre: " + item.name + " / Armadura: " + str(item.armor))
+            elif isinstance(item, SingleUseItem):
+                details = f"Nombre: {item.name}"
+                if item.buffArmor != 0:
+                    details += f" / Bonus armadura: {item.buffArmor}"
+                if item.buffDamage != 0:
+                    details += f" / Bonus daño: {item.buffDamage}"
+                if item.restoreHP != 0:
+                    details += f" / Restaura HP: {item.restoreHP}"
+                print(details)
 
     def calculateStats(self):
-        total_attack = self.attack
-        total_armor = self.armor
+        totalAttack = self.attack
+        totalArmor = self.armor
 
         for item in self.inventory:
             if isinstance(item, Weapon):
-                total_attack += item.damage
+                totalAttack += item.damage
             elif isinstance(item, Armor):
-                total_armor += item.armor
-        print(total_armor, total_attack)
-        return total_attack, total_armor
+                totalArmor += item.armor
+        print(totalArmor, totalAttack)
+        return totalAttack, totalArmor
 
     def restoreAll(self):
         self.vitAct = self.vitMax
 
     def useSingleItemUse(self):
-        print("Pocion")
+        print("Lista de objetos: ")
+        itemListToUse = []
+        index = 1
+        for item in self.inventory:
+            if isinstance(item, SingleUseItem):
+                print(f"{index}. {item.name}")
+                itemListToUse.append(item)
+                index += 1
+
+        print("\n")
+        useItem = input("¿Que objeto quieres usar (Ingresa el número)?")
+
+        try:
+            itemIndex = int(useItem) - 1
+            if 0 <= itemIndex < len(itemListToUse):
+                itemToUse = itemListToUse[itemIndex]
+                if itemToUse.buffArmor != 0:
+                    self.armor += itemToUse.buffArmor
+                    print(f"Tienes {self.armor} de armadura")
+                if itemToUse.buffDamage != 0:
+                    self.attack += itemToUse.buffDamage
+                    print(f"Tienes {self.attack} de ataque.")
+                if itemToUse.restoreHP != 0:
+                    self.vitAct += itemToUse.restoreHP
+                    print(f"Tienes {self.vitAct} de HP.")
+                self.inventory.remove(itemToUse)
+            else:
+                print("Número de objeto no válido.\n")
+        except ValueError:
+            print("Error, tienes que ingresar un digito.\n")
+
+    print("\n")
 
     def checkLevelUp(self):
         totalExpToUp = 5 + (self.get_level() * 4) + self.get_level()

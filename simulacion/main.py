@@ -17,7 +17,7 @@ while True:
 
     if choice == 1:
         print("Bienvenid@ al Menú!")
-        print("¿Que deseas hacer?")
+        print("¿Que deseas hacer?\n")
         Menu.menu(player)
     elif choice == 2:
         enemy = Enemy.createEnemy()

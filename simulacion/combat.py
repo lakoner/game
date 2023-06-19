@@ -44,30 +44,30 @@ class Combat:
             if oro != 0:
                 print(f"Recibes {oro} de oro.")
                 self.player.gold += oro
-                print(f"Tienes {self.player.gold} de oro total.")
+                print(f"Tienes {self.player.gold} de oro total.\n")
             return True
 
 
     def playerDoDamage(self):
         print("Golpeas!")
-        print(f"\nEl enemigo recibe: {self.player.attack} de daño.")
+        print(f"El enemigo recibe: {self.player.attack} de daño.")
         self.enemy.vitAct -= self.player.attack
-        print(f"El enemigo tiene: {self.enemy.vitAct} de HP restante.")
+        print(f"El enemigo tiene: {self.enemy.vitAct} de HP restante.\n")
         return self.enemy.vitAct      
     
     def enemyDoDamage(self):
         print("El enemigo golpea!")
         print(f"Recibes: {self.enemy.get_attack()} de daño.")
         self.player.vitAct -= self.enemy.attack
-        print(f"Tienes: {self.player.vitAct} de HP.")
+        print(f"Tienes: {self.player.vitAct} de HP.\n")
         return self.player.vitAct    
 
     def checkFasterFight(self):
         playerSpeed = self.player.speed
         enemySpeed = self.enemy.speed
         if playerSpeed >= enemySpeed:
-            print(f"{self.player.name} empieza.")
+            print(f"{self.player.name} empieza!\n")
             return True
         elif playerSpeed < enemySpeed:
-            print(f"El enemigo {self.enemy.name} empieza.")
+            print(f"El enemigo {self.enemy.name} empieza!\n")
             return False
